@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-mamalog-bg text-mamalog-text antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-mamalog-muted/35;
+}
+
+.custom-scrollbar {
+  scrollbar-gutter: stable;
+}
