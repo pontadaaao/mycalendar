@@ -54,8 +54,8 @@ type BottomNavigationProps = {
 
 export function BottomNavigation({ active, onChange }: BottomNavigationProps) {
   return (
-    <nav className="border-t border-black/[0.05] bg-white/95 px-2 pb-3 pt-2 backdrop-blur supports-[backdrop-filter]:bg-white/85">
-      <div className="flex items-end justify-between">
+    <nav className="pointer-events-auto border-t border-black/[0.05] bg-white/78 px-1 pt-2 shadow-[0_-2px_20px_-6px_rgba(58,42,42,0.06)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/70">
+      <div className="flex items-end justify-between px-2 pb-[max(10px,env(safe-area-inset-bottom))] pt-0.5">
         {ITEMS.map((item) => {
           const isOn = active === item.id;
           const NavIcon = item.Icon;
@@ -65,7 +65,7 @@ export function BottomNavigation({ active, onChange }: BottomNavigationProps) {
               type="button"
               onClick={() => onChange(item.id)}
               aria-current={isOn ? "page" : undefined}
-              className={`flex flex-1 flex-col items-center gap-1 rounded-2xl py-1.5 text-[10px] font-semibold transition-colors ${
+              className={`flex flex-1 flex-col items-center gap-1 py-2 text-[10px] font-semibold tracking-tight transition-colors ${
                 isOn ? "text-mamalog-main" : "text-mamalog-muted"
               }`}
             >

@@ -7,8 +7,11 @@ body {
   min-height: 100%;
 }
 
-body {
-  @apply bg-mamalog-bg text-mamalog-text antialiased;
+body.mamalog-app-root {
+  @apply text-mamalog-text antialiased;
+  background-color: #fffbfc;
+  background-image: linear-gradient(180deg, #ffffff 0%, #fff9fa 45%, #fff5f8 100%);
+  background-attachment: fixed;
 }
 
 ::-webkit-scrollbar {

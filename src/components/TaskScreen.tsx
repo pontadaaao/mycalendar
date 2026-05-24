@@ -29,7 +29,7 @@ export function TaskScreen({
       : [...tasks].sort((a, b) => Number(a.done) - Number(b.done));
 
   return (
-    <div className="flex flex-col gap-5 pb-12 pt-4">
+    <div className="flex flex-col gap-5 pb-8 pt-2">
       <div
         className="mx-auto flex w-full rounded-full bg-mamalog-sub/40 p-1"
         role="tablist"
@@ -50,7 +50,7 @@ export function TaskScreen({
               aria-selected={on}
               onClick={() => onFilter(p.id)}
               className={`flex-1 rounded-full px-3 py-2 text-[12px] font-semibold transition-colors ${
-                on ? "bg-mamalog-main text-white shadow-sm" : "text-mamalog-muted hover:text-mamalog-text/80"
+                on ? "bg-mamalog-main text-white shadow-none" : "text-mamalog-muted hover:text-mamalog-text/80"
               }`}
             >
               {p.label}

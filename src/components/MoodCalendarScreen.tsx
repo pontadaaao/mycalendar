@@ -70,7 +70,7 @@ export function MoodCalendarScreen({ entries, onSaveEntry }: MoodCalendarScreenP
   }
 
   return (
-    <div className="flex flex-col gap-5 pb-12 pt-4">
+    <div className="flex flex-col gap-5 pb-8 pt-2">
       {/* 入力カード（選択日に対する記録） */}
       <div ref={inputCardRef}>
         <Card className="!px-5 !py-5">

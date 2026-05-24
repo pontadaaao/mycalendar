@@ -12,7 +12,9 @@ const config: Config = {
         mamalog: {
           main: "#FF7F91",
           sub: "#FFE8E8",
-          bg: "#FFFFFF",
+          /** アプリ共通の下地（一覧のフェードなど）— 単色グラデとは近いトーンで統一 */
+          bg: "#FFFAFB",
+          page: "#FFFAFB",
           text: "#3A2A2A",
           muted: "#9A8A8A",
           blue: "#8EB8FF",

@@ -155,9 +155,9 @@ export function AppTabHeader({
                 : "メンバーメニューを開く"
             }
             onClick={() => setMenuOpen((v) => !v)}
-            className={`flex h-[38px] w-[38px] shrink-0 items-center justify-center overflow-hidden rounded-full text-[22px] ring-1 ring-black/[0.06] outline-none transition hover:opacity-95 active:scale-[0.96] ${
-              !selectedMember ? "bg-mamalog-sub/40" : selectedMember.avatarImage ? "bg-transparent" : ""
-            } ${menuOpen ? "ring-2 ring-mamalog-main/55 ring-offset-2 ring-offset-white" : ""}`}
+            className={`flex h-[38px] w-[38px] shrink-0 items-center justify-center overflow-hidden rounded-full text-[22px] ring-1 ring-black/[0.05] outline-none transition hover:opacity-95 active:scale-[0.96] ${
+              !selectedMember ? "bg-mamalog-sub/35" : selectedMember.avatarImage ? "bg-transparent" : ""
+            } ${menuOpen ? "ring-2 ring-mamalog-main/50 ring-offset-2 ring-offset-[#FFF9FA]" : ""}`}
             style={
               selectedMember && !selectedMember.avatarImage
                 ? { backgroundColor: selectedMember.avatarBg }
@@ -185,7 +185,7 @@ export function AppTabHeader({
           {menuOpen ? (
             <div
               role="menu"
-              className="absolute left-0 top-full z-[101] mt-1 w-[210px] overflow-hidden rounded-2xl bg-white shadow-[0_8px_30px_rgba(58,42,42,0.18)] ring-1 ring-black/[0.08]"
+              className="absolute left-0 top-full z-[101] mt-1 w-[210px] overflow-hidden rounded-[18px] border border-black/[0.06] bg-white/94 shadow-[0_10px_30px_-8px_rgba(58,42,42,0.12)] backdrop-blur-xl"
             >
               <p className="px-4 pt-3 pb-1 text-[10.5px] font-bold text-mamalog-muted">
                 {selectedMember ? `選択中：${selectedMember.name}さん` : "メンバーを選択中ではありません"}
@@ -239,7 +239,7 @@ export function AppTabHeader({
             type="button"
             aria-label="予定を追加"
             onClick={() => onAddSchedule?.()}
-            className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-mamalog-sub/70 text-mamalog-main shadow-[0_1px_3px_rgba(58,42,42,0.08)] outline-none ring-0 transition hover:bg-mamalog-sub focus:outline-none focus-visible:outline-none active:scale-[0.94]"
+            className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-mamalog-sub/50 text-mamalog-main outline-none transition hover:bg-mamalog-sub/75 focus:outline-none focus-visible:outline-none active:scale-[0.94]"
           >
             <PlusIcon />
           </button>

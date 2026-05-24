@@ -31,8 +31,8 @@ export function DayTimeline({
 
   if (timed.length === 0 && allDay.length === 0) {
     return (
-      <div className="rounded-2xl bg-white px-4 py-10 text-center ring-1 ring-black/[0.04]">
-        <p className="text-[12px] text-mamalog-muted">{emptyMessage}</p>
+      <div className="rounded-2xl border border-black/[0.04] bg-white/62 px-4 py-10 text-center backdrop-blur-[2px]">
+        <p className="text-[12px] leading-relaxed text-mamalog-muted">{emptyMessage}</p>
       </div>
     );
   }
@@ -63,7 +63,7 @@ export function DayTimeline({
   const hourIndices = Array.from({ length: numSlots }, (_, i) => startHour + i);
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-[0_2px_10px_rgba(58,42,42,0.04)] ring-1 ring-black/[0.04]">
+    <div className="overflow-hidden rounded-2xl border border-black/[0.04] bg-white/62 backdrop-blur-[2px]">
       {allDay.length > 0 ? (
         <div className="space-y-1.5 border-b border-black/[0.05] px-3 py-2.5">
           <p className="text-[10px] font-bold uppercase tracking-wide text-mamalog-muted">終日</p>

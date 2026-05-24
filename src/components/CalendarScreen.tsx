@@ -83,21 +83,32 @@ function ScheduleGroup({
 }) {
   return (
     <div className="space-y-2">
-      <h3 className="px-1 text-[12.5px] font-bold text-mamalog-text">{formatJpDate(iso)}</h3>
-      <ul className="overflow-hidden rounded-2xl bg-white shadow-[0_2px_10px_rgba(58,42,42,0.04)] ring-1 ring-black/[0.04]">
-        {rows.map((s, idx) => (
-          <div key={s.id} className={idx > 0 ? "border-t border-black/[0.05]" : ""}>
-            <ScheduleRow s={s} categories={categories} members={members} onClick={onScheduleClick} />
-          </div>
+      <h3 className="px-0.5 text-[12.5px] font-bold text-mamalog-text">{formatJpDate(iso)}</h3>
+      <ul className="divide-y divide-black/[0.04] overflow-hidden rounded-2xl border border-black/[0.04] bg-white/62 backdrop-blur-[2px]">
+        {rows.map((s) => (
+          <ScheduleRow key={s.id} s={s} categories={categories} members={members} onClick={onScheduleClick} />
         ))}
       </ul>
     </div>
   );
 }
 
-function EmptyCard({ message }: { message: string }) {
+function EmptyCard({
+  message,
+  emphasis = "default",
+}: {
+  message: string;
+  emphasis?: "default" | "soft";
+}) {
+  if (emphasis === "soft") {
+    return (
+      <div className="rounded-2xl border border-transparent bg-gradient-to-br from-mamalog-sub/30 via-white/[0.45] to-mamalog-sub/[0.08] px-4 py-[1.625rem] text-center backdrop-blur-[1px]">
+        <p className="mx-auto max-w-[18rem] text-[12px] leading-relaxed text-mamalog-muted/95">{message}</p>
+      </div>
+    );
+  }
   return (
-    <div className="rounded-2xl bg-white px-4 py-8 text-center ring-1 ring-black/[0.04]">
+    <div className="rounded-2xl border border-black/[0.04] bg-white/62 px-4 py-[1.875rem] text-center backdrop-blur-[2px]">
       <p className="text-[12px] text-mamalog-muted">{message}</p>
     </div>
   );
@@ -320,9 +331,9 @@ export function CalendarScreen({
           : `${cursorYear}年${cursorMonthIndex + 1}月の予定`;
 
   return (
-    <div className="flex flex-col gap-4 pb-12">
+    <div className="flex flex-col gap-4 pb-6">
       {/* スクロール時も画面上に残す：表示切替 + メンバータブ */}
-      <div className="sticky top-0 z-20 -mx-5 bg-white px-5 pb-3 pt-4 shadow-[0_6px_14px_-10px_rgba(58,42,42,0.18)]">
+      <div className="sticky top-0 z-20 -mx-4 mb-1 border-b border-black/[0.04] px-4 pb-3 pt-3 backdrop-blur-lg bg-[#FFF9FA]/90 supports-[backdrop-filter]:bg-[#FFF9FA]/75">
         <div className="flex flex-col gap-4">
           <div
             className="flex w-full rounded-full bg-mamalog-sub/40 p-1"
@@ -339,7 +350,9 @@ export function CalendarScreen({
                   aria-selected={on}
                   onClick={() => onCalendarViewChange(p.id)}
                   className={`flex-1 rounded-full px-3 py-1.5 text-[12px] font-semibold transition-colors ${
-                    on ? "bg-mamalog-main text-white shadow-sm" : "text-mamalog-muted hover:text-mamalog-text/80"
+                    on
+                      ? "bg-mamalog-main text-white shadow-none"
+                      : "text-mamalog-muted hover:text-mamalog-text/80"
                   }`}
                 >
                   {p.label}
@@ -355,7 +368,7 @@ export function CalendarScreen({
                   type="button"
                   aria-label="メンバーを追加"
                   onClick={onAddMember}
-                  className="mt-2 flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-mamalog-sub/70 text-mamalog-main shadow-[0_1px_3px_rgba(58,42,42,0.08)] outline-none ring-1 ring-black/[0.06] transition hover:bg-mamalog-sub active:scale-[0.94]"
+                  className="mt-2 flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-mamalog-sub/45 text-mamalog-main transition hover:bg-mamalog-sub/70 active:scale-[0.94]"
                 >
                   <svg
                     width="22"
@@ -382,7 +395,7 @@ export function CalendarScreen({
                 type="button"
                 aria-label="メンバーを追加"
                 onClick={onAddMember}
-                className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-mamalog-sub/70 text-mamalog-main shadow-[0_1px_3px_rgba(58,42,42,0.08)] outline-none ring-1 ring-black/[0.06] transition hover:bg-mamalog-sub active:scale-[0.94]"
+                className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-mamalog-sub/45 text-mamalog-main transition hover:bg-mamalog-sub/70 active:scale-[0.94]"
               >
                 <svg
                   width="22"
@@ -470,6 +483,7 @@ export function CalendarScreen({
           weekGroups.length === 0 ? (
             <EmptyCard
               message={noMemberInPersonView ? selectMemberMsg : "今週の予定はありません"}
+              emphasis={noMemberInPersonView ? "soft" : "default"}
             />
           ) : (
             <div className="space-y-3">
@@ -495,6 +509,7 @@ export function CalendarScreen({
                   ? selectMemberMsg
                   : `${cursorMonthIndex + 1}月の予定はありません`
               }
+              emphasis={noMemberInPersonView ? "soft" : "default"}
             />
           ) : (
             <div className="space-y-3">
