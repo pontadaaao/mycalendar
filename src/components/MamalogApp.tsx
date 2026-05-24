@@ -10,15 +10,12 @@ import { AddMemberSheet, type AddMemberPayload } from "./AddMemberSheet";
 import { AddSchedulePane, type AddSchedulePayload } from "./AddSchedulePane";
 import type { AddCategoryPayload } from "./AddCategorySheet";
 import {
-  INITIAL_TASKS,
   MAX_MEMBER_COUNT,
   MEMBER_COLOR_PALETTE,
   NEW_MEMBER_PALETTE,
-  PROTOTYPE_ANCHOR_DATE,
-  PROTOTYPE_ANCHOR_ISO,
-  SAMPLE_MOOD_ENTRIES,
   SAMPLE_SCHEDULES,
   SCHEDULE_CATEGORIES,
+  toISODate,
   type CalendarGranularity,
   type Member,
   type MoodEntry,
@@ -40,12 +37,12 @@ export function MamalogApp() {
   const [tab, setTab] = useState<TabId>("calendar");
   const [calendarView, setCalendarView] = useState<CalendarGranularity>("month");
   const [selectedMemberId, setSelectedMemberId] = useState<string | null>(null);
-  const [selectedDateISO, setSelectedDateISO] = useState(PROTOTYPE_ANCHOR_ISO);
+  const [selectedDateISO, setSelectedDateISO] = useState(() => toISODate(new Date()));
 
-  const [cursor, setCursor] = useState(() => ({
-    year: PROTOTYPE_ANCHOR_DATE.getFullYear(),
-    monthIndex: PROTOTYPE_ANCHOR_DATE.getMonth(),
-  }));
+  const [cursor, setCursor] = useState(() => {
+    const d = new Date();
+    return { year: d.getFullYear(), monthIndex: d.getMonth() };
+  });
 
   /** 週／日表示で日付をまたいだとき、月カレンダーのヘッダとグリッドが選択日と一致するようにする */
   useEffect(() => {
@@ -61,9 +58,9 @@ export function MamalogApp() {
   type SheetState = null | { mode: "add" } | { mode: "edit"; member: Member };
   const [sheet, setSheet] = useState<SheetState>(null);
 
-  const [moodEntries, setMoodEntries] = useState<MoodEntry[]>(SAMPLE_MOOD_ENTRIES);
+  const [moodEntries, setMoodEntries] = useState<MoodEntry[]>([]);
 
-  const [tasks, setTasks] = useState<TaskItem[]>(INITIAL_TASKS);
+  const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [taskScope, setTaskScope] = useState<"today" | "all">("today");
 
   const [schedules, setSchedules] = useState<ScheduleItem[]>(SAMPLE_SCHEDULES);

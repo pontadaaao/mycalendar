@@ -1,7 +1,7 @@
 "use client";
 
 import { isoFromDate, monthMatrix, weekdaysJa } from "@/lib/dates";
-import { PROTOTYPE_ANCHOR_ISO } from "@/lib/mamalog";
+import { toISODate } from "@/lib/mamalog";
 
 type CalendarMonthProps = {
   year: number;
@@ -21,6 +21,7 @@ export function CalendarMonth({
 }: CalendarMonthProps) {
   const cells = monthMatrix(year, monthIndex);
   const weekdays = weekdaysJa();
+  const todayISO = toISODate(new Date());
 
   return (
     <div className="px-1">
@@ -46,7 +47,7 @@ export function CalendarMonth({
           const iso = isoFromDate(d);
           const selected = iso === selectedDateISO;
           const colors = (dotsByDate[iso] ?? []).slice(0, 3);
-          const isToday = iso === PROTOTYPE_ANCHOR_ISO;
+          const isToday = iso === todayISO;
           const dow = d.getDay();
 
           return (

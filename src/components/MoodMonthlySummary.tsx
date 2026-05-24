@@ -66,9 +66,7 @@ export function MoodMonthlySummary({ year, monthIndex, entries }: MoodMonthlySum
               imgClassName="pointer-events-none h-12 w-12 select-none"
               emojiClassName="text-3xl leading-none"
             />
-          ) : (
-            "📝"
-          )}
+          ) : null}
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-[11px] font-semibold text-mamalog-muted">いちばん多かった気持ち</p>

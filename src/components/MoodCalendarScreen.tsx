@@ -9,7 +9,7 @@ import { MoodDetailCard } from "./MoodDetailCard";
 import { MoodMonthlySummary } from "./MoodMonthlySummary";
 import {
   MOOD_KINDS,
-  PROTOTYPE_ANCHOR_ISO,
+  toISODate,
   type MoodEntry,
   type MoodId,
 } from "@/lib/mamalog";
@@ -27,12 +27,13 @@ function formatJpDate(dateISO: string): string {
 }
 
 export function MoodCalendarScreen({ entries, onSaveEntry }: MoodCalendarScreenProps) {
-  const [selectedDateISO, setSelectedDateISO] = useState(PROTOTYPE_ANCHOR_ISO);
+  const [selectedDateISO, setSelectedDateISO] = useState(() => toISODate(new Date()));
   const [cursor, setCursor] = useState(() => {
-    const d = parseISOLocal(PROTOTYPE_ANCHOR_ISO);
+    const d = new Date();
     return { year: d.getFullYear(), monthIndex: d.getMonth() };
   });
 
+  const todayISO = toISODate(new Date());
   const existing = useMemo(
     () => entries.find((e) => e.dateISO === selectedDateISO),
     [entries, selectedDateISO],
@@ -50,7 +51,7 @@ export function MoodCalendarScreen({ entries, onSaveEntry }: MoodCalendarScreenP
   }, [selectedDateISO, existing?.moodId, existing?.memo]);
 
   const inputCardRef = useRef<HTMLDivElement>(null);
-  const isSelectedToday = selectedDateISO === PROTOTYPE_ANCHOR_ISO;
+  const isSelectedToday = selectedDateISO === todayISO;
 
   function handleSave() {
     if (!editingMood) return;
@@ -155,7 +156,6 @@ export function MoodCalendarScreen({ entries, onSaveEntry }: MoodCalendarScreenP
         <MoodCalendarGrid
           year={cursor.year}
           monthIndex={cursor.monthIndex}
-          todayISO={PROTOTYPE_ANCHOR_ISO}
           selectedDateISO={selectedDateISO}
           entries={entries}
           onSelectDate={setSelectedDateISO}

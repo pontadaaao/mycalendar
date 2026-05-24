@@ -8,7 +8,6 @@ import { MOOD_KINDS, type MoodEntry, type MoodKind } from "@/lib/mamalog";
 type MoodCalendarGridProps = {
   year: number;
   monthIndex: number;
-  todayISO: string;
   selectedDateISO: string;
   entries: MoodEntry[];
   onSelectDate: (iso: string) => void;
@@ -25,7 +24,6 @@ const moodById: Record<string, MoodKind> = MOOD_KINDS.reduce(
 export function MoodCalendarGrid({
   year,
   monthIndex,
-  todayISO,
   selectedDateISO,
   entries,
   onSelectDate,
@@ -70,7 +68,6 @@ export function MoodCalendarGrid({
               key={iso}
               date={d}
               isSelected={iso === selectedDateISO}
-              isToday={iso === todayISO}
               mood={mood}
               onClick={() => onSelectDate(iso)}
             />
