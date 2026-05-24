@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:poll": "NEXT_WEBPACK_POLL=1 next dev",
-    "dev:lan": "next dev -H 0.0.0.0 -p 3000",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "dev:poll": "NEXT_WEBPACK_POLL=1 next dev --webpack",
+    "dev:lan": "next dev --webpack -H 0.0.0.0 -p 3000",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint"
   },
